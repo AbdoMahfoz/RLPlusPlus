@@ -4,21 +4,22 @@
 
 using namespace std;
 
-template<class stateType, class actionType>
-TabularDeterminsticPolicy<stateType, actionType>* GPI::DP(FullyModeledEnviroment<stateType, actionType>& env, 
-                                                          double discount, double stoppingFactor)
+template<class stateType, class actionType, class policyType>
+Policy<stateType, actionType>* GPI::DP(FullyModeledEnviroment<stateType, actionType>& env, 
+                                       double discount, double stoppingFactor)
 {
     pair<stateType*, int> stateSpace = env.GetStates();
     pair<actionType*, int> actionSpace = env.GetActions();
     map<const stateType&, double> v;
-    TabularDeterminsticPolicy<stateType, actionType>* policy;
-    policy = new TabularDeterminsticPolicy<stateType, actionType>(env);
+    Policy<stateType, actionType>* policy;
+    policy = new policyType<stateType, actionType>(env);
     bool updated;
     do
     {
         updated = false;
         for(int i = 0; i < stateSpace.second; i++)   
         {
+            if(stateSpace.first[i].IsTerminal) continue;
             double maxVal = 0;
             const actionType& action;
             vector<pair<double, pair<const stateType&, int>>>* props;
