@@ -37,7 +37,7 @@ pair<const stateType&, int> FullyModeledEnviroment<stateType, actionType>::Inter
     }
     srand(time(NULL));
     int propability = rand() % 101;
-    vector<pair<double, pair<const stateType&, int>>>* props = this->Model(action, this->currentState);
+    vector<pair<double, pair<const stateType&, int>>>* props = this->Model(action, *(this->currentState));
     for (int i = 0; i < props->size(); i++)
     {
         propability -= (int)(props->at(i).first * 100);
@@ -50,7 +50,7 @@ pair<const stateType&, int> FullyModeledEnviroment<stateType, actionType>::Inter
         }
     }
     delete props;
-    throw std::exception("The provided enviroment model returned uneven probabilites");
+    throw std::exception("The provided enviroment model returned probabilites that don't add-up to 1");
 }
 
 template<class stateType, class actionType>
