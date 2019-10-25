@@ -4,15 +4,14 @@
 #include <set>
 #include <map>
 
-template <class stateType, class actionType, class policyType>
+template <class stateType, class actionType>
 Policy<stateType, actionType>* GPI::MonteCarlo(Enviroment<stateType, actionType>& env,
-                                               double discount, double stoppingfactor,
-                                               double learningFactor, int episodeCount)
+                                               double discount, double stoppingfactor, int episodeCount)
 {
     pair<actionType*, int> actionSpace = env.GetActions();
     EquiProbablePolicy<stateType, actionType> exploringPolicy(env);
     Policy<stateType, actionType>* resPolicy;
-    resPolicy = new policyType<stateType, actionType>(env);
+    resPolicy = new TabularDeterminsticPolicy<stateType, actionType>(env);
     EpisodicAgent<stateType, actionType> agent(env, exploringPolicy, true);
     map<pair<const stateType&, const actionType&>, double> q, c;
     set<const stateType&> visitedStates;

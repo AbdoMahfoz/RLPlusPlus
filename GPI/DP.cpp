@@ -4,7 +4,7 @@
 
 using namespace std;
 
-template<class stateType, class actionType, class policyType>
+template<class stateType, class actionType>
 Policy<stateType, actionType>* GPI::DP(FullyModeledEnviroment<stateType, actionType>& env, 
                                        double discount, double stoppingFactor)
 {
@@ -12,7 +12,7 @@ Policy<stateType, actionType>* GPI::DP(FullyModeledEnviroment<stateType, actionT
     pair<actionType*, int> actionSpace = env.GetActions();
     map<const stateType&, double> v;
     Policy<stateType, actionType>* policy;
-    policy = new policyType<stateType, actionType>(env);
+    policy = new TabularDeterminsticPolicy<stateType, actionType>(env);
     bool updated;
     do
     {
