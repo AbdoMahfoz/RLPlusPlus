@@ -5,10 +5,10 @@
 #include <assert.h>
 
 template <class stateType, class actionType>
-FullyModeledEnviroment<stateType, actionType>::FullyModeledEnviroment(stateType* stateSpace, int stateCount, 
-                                                                      stateType* startStates, int startStatesCount,
-    actionType* actionSpace, int actionCount, vector<pair<double, pair<const stateType&, int>>>* (*Model)(const actionType&,
-                                                                                                          const stateType&))
+FullyModeledEnviroment<stateType, actionType>::FullyModeledEnviroment(
+    stateType* stateSpace, int stateCount, stateType* startStates, int startStatesCount,
+    actionType* actionSpace, int actionCount, 
+    vector<pair<double, pair<const stateType&, int>>>* (*Model)(const actionType&, const stateType&))
     : Enviroment<stateType, actionType>(actionSpace, actionCount)
 {
     this->stateSpace = stateSpace;
@@ -20,9 +20,11 @@ FullyModeledEnviroment<stateType, actionType>::FullyModeledEnviroment(stateType*
 }
 
 template <class stateType, class actionType>
-vector<pair<double, pair<const stateType&, int>>>* FullyModeledEnviroment<stateType, actionType>::GetAllProbabilities(
-    const actionType& action, const stateType& state)
+vector<pair<double, pair<const stateType&, int>>>* 
+FullyModeledEnviroment<stateType, actionType>::GetAllProbabilities(const actionType& action, 
+                                                                   const stateType& state)
 {
+    if(state == nullptr) state = this->currentState;
     return this->Model(action, state);
 }
 
