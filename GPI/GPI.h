@@ -1,8 +1,8 @@
 #ifndef GPI_NAMESPACE   
 #define GPI_NAMESPACE
 
-#include "../Enviroment/FullyModeledEnviroment.h"
-#include "../Policy/TabularDeterminsticPolicy.h"
+#include "../Enviroment/FullyModeledEnviroment.cpp"
+#include "../Policy/Policy.h"
 
 namespace GPI
 {
@@ -13,6 +13,10 @@ namespace GPI
     template <class stateType, class actionType>
     Policy<stateType, actionType>* MonteCarlo(Enviroment<stateType, actionType>& env,
                                               double discount, double stoppingfactor, int episodeCount);
+
+    template <class stateType, class actionType>
+    Policy<stateType, actionType>* TD(Enviroment<stateType, actionType>& env,
+                                      double discount, double stoppingfactor, int episodeCount);
 }
 
 

@@ -5,8 +5,8 @@
 using namespace std;
 
 template<class stateType, class actionType>
-Policy<stateType, actionType>* GPI::DP(FullyModeledEnviroment<stateType, actionType>& env, 
-                                       double discount, double stoppingFactor)
+Policy<stateType, actionType>* GPI::DP<stateType, actionType>
+    (FullyModeledEnviroment<stateType, actionType>& env, double discount, double stoppingFactor)
 {
     pair<stateType*, int> stateSpace = env.GetStates();
     pair<actionType*, int> actionSpace = env.GetActions();

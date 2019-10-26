@@ -3,6 +3,7 @@
 
 #include "../Enviroment/Enviroment.h"
 #include "../Policy/Policy.h"
+#include <functional>
 #include <stack>
 
 template <class stateType, class actionType>
@@ -29,13 +30,15 @@ private:
     Enviroment<stateType, actionType>& env;
     Policy<stateType, actionType>& policy;
     stack<EpisodeHistory<stateType, actionType>> history;
-    void (*interrupt)(const stateType&, const stateType&, int);
+    void (*interrupt)(const stateType&, const actionType&, const stateType&, int, void*);
     bool recordHistory;
 public:
     EpisodicAgent(Enviroment<stateType, actionType>& env, Policy<stateType, actionType>& policy, 
-                  bool recordHistory, void (*interrupt)(const stateType&, const stateType&, int) = nullptr);
+                  bool recordHistory, void (*interrupt)(const stateType&, const actionType&, 
+                                                        const stateType&, int, void*) = nullptr);
     void PlayAnEpisode();
     void ShouldRecordHistory(bool);
+    void SetInterrupt(void (*interrupt)(const stateType&, const actionType&, const stateType&, int, void*));
     stack<EpisodeHistory<stateType, actionType>>& GetHistory();
 };
 
