@@ -21,7 +21,8 @@ void EpisodicAgent<stateType, actionType>::PlayAnEpisode()
     {
         const actionType& action = policy.Act(curState);
         pair<const stateType&, int> result = env.Interact(action);
-        if(recordHistory) history.push(EpisodeHistory(curState, action, result.first, result.second));
+        if(recordHistory) history.push(EpisodeHistory<stateType, actionType>(curState, action, 
+                                                                             result.first, result.second));
         if(interrupt != nullptr) interrupt(curState, action, result.first, result.second, this);
         curState = result.first;
     }

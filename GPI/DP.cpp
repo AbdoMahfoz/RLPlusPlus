@@ -1,11 +1,12 @@
 #include "GPI.h"
 #include <map>
 #include <stdlib.h>
+#include "../Policy/TabularDeterminsticPolicy.h"
 
 using namespace std;
 
 template<class stateType, class actionType>
-Policy<stateType, actionType>* GPI::DP<stateType, actionType>
+Policy<stateType, actionType>* GPI::DP
     (FullyModeledEnviroment<stateType, actionType>& env, double discount, double stoppingFactor)
 {
     pair<stateType*, int> stateSpace = env.GetStates();

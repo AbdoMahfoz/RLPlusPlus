@@ -1,12 +1,13 @@
 #include "GPI.h"
 #include "../Agents/EpisodicAgent.cpp"
 #include "../Policy/EquiProbablePolicy.cpp"
+#include "../Policy/TabularDeterminsticPolicy.h"
 #include <set>
 #include <map>
 
 template <class stateType, class actionType>
-Policy<stateType, actionType>* GPI::MonteCarlo<stateType, actionType>
-    (Enviroment<stateType, actionType>& env,double discount, double stoppingfactor, int episodeCount)
+Policy<stateType, actionType>* GPI::MonteCarlo
+    (Enviroment<stateType, actionType>& env, double discount, double stoppingfactor, int episodeCount)
 {
     pair<actionType*, int> actionSpace = env.GetActions();
     EquiProbablePolicy<stateType, actionType> exploringPolicy(env);

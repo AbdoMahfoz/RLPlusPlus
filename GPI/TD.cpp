@@ -42,7 +42,7 @@ public:
 #endif
 
 template <class stateType, class actionType>
-Policy<stateType, actionType>* GPI::TD<stateType, actionType>
+Policy<stateType, actionType>* GPI::TD
     (Enviroment<stateType, actionType>& env, double discount, double stoppingfactor, 
     int episodeCount, double learningFactor)
 {

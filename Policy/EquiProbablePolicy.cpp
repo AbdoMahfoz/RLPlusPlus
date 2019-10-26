@@ -1,4 +1,7 @@
 #include "EquiProbablePolicy.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 template<class stateType, class actionType>
 const actionType& EquiProbablePolicy<stateType, actionType>::Act(const stateType& state)
